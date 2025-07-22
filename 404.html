@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title> </title>
+	<style>
+        #container{width: 520px; margin: 0 auto; position: relative; height: 100vh;}
+        @media (max-width: 768px) { #container {width: unset;} }
+        body,html,p{margin:0;padding:0;overflow:hidden}.iframe-div{width:100%;height:100%;border:none}#musicBtn{position:fixed;cursor:pointer;width:32px;height:32px;border:none;border-radius:50%;font-size:1em;line-height:40px;text-align:center;z-index:999;top:20px;right:20px}#musicBtn img{width: 100%;}.roll{animation:1s linear 0s infinite normal none running music_play_rotate}
+        #makeLink,#moreLink{position: fixed; width: 36px; height: 36px; border: 2px solid #fff; border-radius: 50%; font-size: .9rem; line-height: 2.2rem; text-align: center; z-index: 999; background-color: rgba(0, 0, 0, .3); right: 15px; cursor: pointer; color: #fff; text-decoration: none;}#moreLink{bottom:50px}#makeLink{bottom:110px}@-webkit-keyframes music_play_rotate{0%{-webkit-transform:rotate(0)}100%{-webkit-transform:rotate(360deg)}}
+    
+        /*大部分模板的样式css*/
+        .open-main{background-color: #000; position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#000 ; font-size:15px;}
+        .open-main p{font-size: 1.2rem; font-weight: 800; margin: 1rem}
+        .open-main img{width:7.0rem;margin-bottom:2rem; animation-name: heartbeat; animation-duration: 2s; animation-timing-function: cubic-bezier(0,0,0,1.74); animation-delay: .5s; animation-iteration-count: infinite; animation-play-state: running;}
+        @keyframes heartbeat { 0% { transform: scale(.95) } 100% { transform: scale(.95) } 50% { transform: scale(1) } }
+
+        /*open的样式css*/
+        .liwu img { color: #000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 5rem !important; margin: 0 auto 150px; }
+        .liwu .text { font-size: 1.2rem; color: #000; word-wrap: break-word; overflow-wrap: break-word; text-align: center; margin: -8rem auto 0px auto; }
+        .liwu p{text-align: center;}
+        .liwu .btn { background-color: #07c160; color: #fff; border: none; padding: 0.7rem 3.2rem; font-size: 1.2rem; cursor: pointer; margin-top: 3rem; margin-bottom: 4rem; border-radius: 10px; }
+    
+        /*alert的样式css*/
+        .swal-overlay{position:fixed;top:0;bottom:0;left:0;right:0;text-align:center;font-size:0;overflow-y:auto;background-color:rgb(173 173 173);z-index:10000;pointer-events:none;opacity:0;transition:opacity .3s;display:block;}.swal-overlay:before{content:" ";display:inline-block;vertical-align:middle;height:100%}.swal-overlay--show-modal{opacity:1;pointer-events:auto}.swal-overlay--show-modal .swal-modal{opacity:1;pointer-events:auto;box-sizing:border-box;-webkit-animation:showSweetAlert .3s;animation:showSweetAlert .3s;will-change:transform}.swal-modal{width:478px;opacity:0;pointer-events:none;background-color:#fff;text-align:center;border-radius:5px;position:static;margin:20px auto;display:inline-block;vertical-align:middle;-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;z-index:10001;transition:opacity .2s,-webkit-transform .3s;transition:transform .3s,opacity .2s;transition:transform .3s,opacity .2s,-webkit-transform .3s}@media (max-width:500px){.swal-modal{width:calc(100% - 30px)}}@-webkit-keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}@keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}.swal-icon:first-child{margin-top:32px;}.swal-icon{width:80px;height:80px;border-width:4px;border-style:solid;border-radius:50%;padding:0;position:relative;box-sizing:content-box;margin:20px auto;}.swal-icon--warning{border-color:#f8bb86;-webkit-animation:pulseWarning .75s infinite alternate;animation:pulseWarning .75s infinite alternate;}.swal-text{font-size:16px;position:relative;float:none;line-height:normal;vertical-align:top;text-align:center;display:inline-block;margin:0;padding:0 10px;font-weight:400;color:rgba(0,0,0,.64);max-width:calc(100% - 20px);overflow-wrap:break-word;box-sizing:border-box;}.swal-footer{text-align:right;padding-top:13px;margin-top:13px;padding:13px 16px;border-radius:inherit;border-top-left-radius:0;border-top-right-radius:0;}.swal-button-container{margin:5px;display:inline-block;position:relative;}.swal-button{background-color:#7cd1f9;color:#fff;border:none;box-shadow:none;border-radius:5px;font-weight:600;font-size:14px;padding:10px 24px;margin:0;cursor:pointer;}.swal-icon--warning{border-color:#f8bb86;-webkit-animation:pulseWarning .75s infinite alternate;animation:pulseWarning .75s infinite alternate}.swal-icon--warning__body{width:5px;height:47px;top:10px;border-radius:2px;margin-left:-2px}.swal-icon--warning__body,.swal-icon--warning__dot{position:absolute;left:50%;background-color:#f8bb86}.swal-icon--warning__dot{width:7px;height:7px;border-radius:50%;margin-left:-4px;bottom:-11px}.swal-button-container{border:solid 2px #C7D6E4;border-radius:6px;padding:1px;}
+    </style>
+</head>
+<body>
+    <div id="container">
+	<iframe id="myframe" class="iframe-div" width="100%" src=""></iframe>
+    
+    <a id="moreLink" href="http://new1.wan77.cn/cate-7B">更多</a>
+	<a id="makeLink" href="weixin://dl/business/?appid=wx402c49bfc5361376&path=pages/index/index&query=channel">制作</a>
+
+    <div id="musicBtn" style="display:none;">
+		<img class="roll" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAQAAAC0jZKKAAAELElEQVRIx72X7UtbdxTHP/femCVprVm2dI4MMZpEUDqYMKJtHG6zCsJ84QZb90KRFTryeuk/kb2WFQpWC7Ww1kKhGwuOleqqebFS5xBifKISdKazUbs8iDd3L3LVqPfmoWw7eZN7zu9+cu7J73fu9wgUMcVNIw04sGMC0sSJEWFOiBa+TyiI7KRNtmhHpSQThPTxOmClmX7ZWexpQFpmWHhSIlipwy979q9WUlM7j3dm0wu7iSxYRZfxnOl8ZWtlrfkAPs+gsFQUrLQSkA0AqexYfDAeTmvn6jX57b12swgg7REUpgqClc/kvty30Y1AbF0uXIhqKei4dFbNe0S4owtW+uVPAdYyA4vjyeIVBuiwDNW//RqAdFcY1gTvZzu91bO4mS0NC2AT79e3VB3PWjysbQ4b2myPloOFzWx7NLQJIPcprcfASh2BXLbdS3u6iO8//M6r5d+je2l6C4CAUnc0Y79sgLVMz2Kh3Gps772jF+tZXMuAbMCfB1aac/t2oEhtE0lPjX5BBhYBZI/SfJhxP8DoRrGdsJqwWt8y6kXHk6MbhzQRFLfshFQ2EKOIbWfg0Zf68UAslQXZqbhzGXcCjMWLHQcwCOBxhrr14uvyWBxyRBFoAxiMF8MCyHtw0Xv/ol5cpbSBqLhlC6yk9HpCvjmqbox/PbSy+olPe9tBOL2SAtmiuEUaAaZ2SsnXVLGdubbivH7v0ZXu3mod9DYAjSINAFMvSypE1lIB0Pvz3MLty9prfv0bgAYRB8DvqVLAh9Z0s6LiqkcropIcInaAhd3ywBBZ+uq8ll8l2UVMAImy2g5AeMFo0PKrJJNYFi3PnidfFPzDRdIA1rJ/oMoU39byq6S0SBzAZSyDCUB15R/rWn6VFBeJAbxrLoMJgNl4LaLlV0kxkQjAhVPlYa96Esl5zV6okiIicwDeM6XgXiTNBoDTUofr+qz2GpU0ZxCiSlK21Jq9Jv1u0WLtc9e8/izhsoefAZySbsz8qNm0vKZaM0hJIWoAJugCvz28qo0d/eDzjwT1bT7yFODP3Vs6vdtvB2Ai1zZDAL32aklr6YOuLz4WDkRCZUWhUlVLvTlwCEQQotIymMWg4+TSK7XdRw7ub5uFwEGHWQRpWYjuv/OGAS6d7TghWS+/n3/1+Okvf+lj2y2q3BoGFSw8keYBhuptx05gKLKb2f9Mz1y4p4+1iTfrAaT5nKxVq6fU8a1sgOktXxGlrmeT7pYqkPb4Jidp1QyFJYIALVU/1L0K9oEzp94I7ivlg0cXpqQRgE7bQ5etrJZkEx+6ut4AkEYOVXIeQrgj3QXwWWea2i2lYtstM00+K4A0lq+Q/z3hfUu4nR/7v0YFODnchLcnX86mF3afy/Cm5DKeM/lOe8+UPdyo8P9iHDuAu+nCV2CAnOSnsgfII/hXGnn/AachjVCELR1AAAAAAElFTkSuQmCC">
+        <audio id="music" src="" loop="loop"></audio>
+	</div>
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    var dataInfo = null;
+    var ua = navigator.userAgent.toLowerCase(); 
+    var nid = location.pathname.replace(/\//g, '');
+    var iframe = document.getElementById('myframe');
+    var music = document.getElementById("music");
+    var dtitle = '';
+
+    $.ajax({
+		url: 'https://web-tx.x91.cn/api/getContentByNid?nid=' + nid,
+		async: false,
+		success: function (res) {
+			dataInfo = res.data;
+			dtitle = dataInfo.title;
+            console.log("dataInfo", dataInfo);
+            
+            if(dataInfo['302']){
+                window.location.href = dataInfo['302'];
+            }else{
+                setDataInfo(dataInfo);
+			    localStorage.setItem('templateDate', JSON.stringify(dataInfo));
+            }
+            
+            /*
+			//by@wht
+			let returnPwd = res.data.password
+			//拦截是否有密码，有密码弹出模态框，输入密码校验
+			if (res.data.password != null && res.data.password != '') {
+				$("#modalTxt").html(res.data.question)
+				$("#commitModal").show();
+			}
+            */
+        },
+    })
+    
+    
+    
+    
+    //localStorage.setItem('templateDate', '[]');
+    
+    function setDataInfo(data){
+        document.title = data.title;
+        //展现弹窗页面
+        var container = document.getElementById("container");
+        container.insertAdjacentHTML('beforeend', dataInfo.msgHtml);
+        
+        //加载内容页面
+        iframe.src = data.templatePath + '/index.html?v1000';
+        if(data.music){
+            music.src = data.music;
+        }else{
+            document.getElementById("musicBtn").style.display = "none";
+        }
+        
+        var openBtn = document.getElementById("openBtn");
+        if(openBtn){
+            openBtn.addEventListener('click', function(){
+                var openBox = document.querySelector(".open-box");
+                openBox.style.display = "none";
+                iframe.contentWindow.open();
+                playMusic();
+                autoWord();
+                if (typeof ntzgo === 'function') {ntzgo();}
+            });
+        }
+    }
+
+    var musicPlay = true;
+    
+    play = function () {
+        music.play();
+        document.removeEventListener("touchstart", play, false);
+    }
+
+    function playMusic(){
+        music.play();
+        document.addEventListener("DOMContentLoaded",function () {play();},false,);
+        document.addEventListener("WeixinJSBridgeReady",function () {play();},false,);
+        document.addEventListener("touchstart", play, false);
+    }
+    
+    $("#musicBtn").click(function(){
+        if(musicPlay){
+            $("#musicBtn img").removeClass("roll");
+            musicPlay = false;
+            music.pause();
+        }else{
+            $("#musicBtn img").addClass("roll");
+            musicPlay = true;
+            music.play();
+        }
+    })
+</script>
+
+
+
+</body>
+</html>
