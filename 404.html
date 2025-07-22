@@ -32,12 +32,9 @@
 	<iframe id="myframe" class="iframe-div" width="100%" src=""></iframe>
     
     <a id="moreLink" href="http://new1.wan77.cn/cate-7B">更多</a>
-	<a id="makeLink" href="weixin://dl/business/?appid=wx402c49bfc5361376&path=pages/index/index&query=channel">制作</a>
+    <a id="makeLink" href="weixin://dl/business/?appid=wx402c49bfc5361376&path=pages/index/index&query=channel">制作</a>
 
-    <div id="musicBtn" style="display:none;">
-		<img class="roll" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAQAAAC0jZKKAAAELElEQVRIx72X7UtbdxTHP/femCVprVm2dI4MMZpEUDqYMKJtHG6zCsJ84QZb90KRFTryeuk/kb2WFQpWC7Ww1kKhGwuOleqqebFS5xBifKISdKazUbs8iDd3L3LVqPfmoWw7eZN7zu9+cu7J73fu9wgUMcVNIw04sGMC0sSJEWFOiBa+TyiI7KRNtmhHpSQThPTxOmClmX7ZWexpQFpmWHhSIlipwy979q9WUlM7j3dm0wu7iSxYRZfxnOl8ZWtlrfkAPs+gsFQUrLQSkA0AqexYfDAeTmvn6jX57b12swgg7REUpgqClc/kvty30Y1AbF0uXIhqKei4dFbNe0S4owtW+uVPAdYyA4vjyeIVBuiwDNW//RqAdFcY1gTvZzu91bO4mS0NC2AT79e3VB3PWjysbQ4b2myPloOFzWx7NLQJIPcprcfASh2BXLbdS3u6iO8//M6r5d+je2l6C4CAUnc0Y79sgLVMz2Kh3Gps772jF+tZXMuAbMCfB1aac/t2oEhtE0lPjX5BBhYBZI/SfJhxP8DoRrGdsJqwWt8y6kXHk6MbhzQRFLfshFQ2EKOIbWfg0Zf68UAslQXZqbhzGXcCjMWLHQcwCOBxhrr14uvyWBxyRBFoAxiMF8MCyHtw0Xv/ol5cpbSBqLhlC6yk9HpCvjmqbox/PbSy+olPe9tBOL2SAtmiuEUaAaZ2SsnXVLGdubbivH7v0ZXu3mod9DYAjSINAFMvSypE1lIB0Pvz3MLty9prfv0bgAYRB8DvqVLAh9Z0s6LiqkcropIcInaAhd3ywBBZ+uq8ll8l2UVMAImy2g5AeMFo0PKrJJNYFi3PnidfFPzDRdIA1rJ/oMoU39byq6S0SBzAZSyDCUB15R/rWn6VFBeJAbxrLoMJgNl4LaLlV0kxkQjAhVPlYa96Esl5zV6okiIicwDeM6XgXiTNBoDTUofr+qz2GpU0ZxCiSlK21Jq9Jv1u0WLtc9e8/izhsoefAZySbsz8qNm0vKZaM0hJIWoAJugCvz28qo0d/eDzjwT1bT7yFODP3Vs6vdtvB2Ai1zZDAL32aklr6YOuLz4WDkRCZUWhUlVLvTlwCEQQotIymMWg4+TSK7XdRw7ub5uFwEGHWQRpWYjuv/OGAS6d7TghWS+/n3/1+Okvf+lj2y2q3BoGFSw8keYBhuptx05gKLKb2f9Mz1y4p4+1iTfrAaT5nKxVq6fU8a1sgOktXxGlrmeT7pYqkPb4Jidp1QyFJYIALVU/1L0K9oEzp94I7ivlg0cXpqQRgE7bQ5etrJZkEx+6ut4AkEYOVXIeQrgj3QXwWWea2i2lYtstM00+K4A0lq+Q/z3hfUu4nR/7v0YFODnchLcnX86mF3afy/Cm5DKeM/lOe8+UPdyo8P9iHDuAu+nCV2CAnOSnsgfII/hXGnn/AachjVCELR1AAAAAAElFTkSuQmCC">
-        <audio id="music" src="" loop="loop"></audio>
-	</div>
+   
 
 <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
@@ -48,93 +45,7 @@
     var music = document.getElementById("music");
     var dtitle = '';
 
-    $.ajax({
-		url: 'https://web-tx.x91.cn/api/getContentByNid?nid=' + nid,
-		async: false,
-		success: function (res) {
-			dataInfo = res.data;
-			dtitle = dataInfo.title;
-            console.log("dataInfo", dataInfo);
-            
-            if(dataInfo['302']){
-                window.location.href = dataInfo['302'];
-            }else{
-                setDataInfo(dataInfo);
-			    localStorage.setItem('templateDate', JSON.stringify(dataInfo));
-            }
-            
-            /*
-			//by@wht
-			let returnPwd = res.data.password
-			//拦截是否有密码，有密码弹出模态框，输入密码校验
-			if (res.data.password != null && res.data.password != '') {
-				$("#modalTxt").html(res.data.question)
-				$("#commitModal").show();
-			}
-            */
-        },
-    })
-    
-    
-    
-    
-    //localStorage.setItem('templateDate', '[]');
-    
-    function setDataInfo(data){
-        document.title = data.title;
-        //展现弹窗页面
-        var container = document.getElementById("container");
-        container.insertAdjacentHTML('beforeend', dataInfo.msgHtml);
-        
-        //加载内容页面
-        iframe.src = data.templatePath + '/index.html?v1000';
-        if(data.music){
-            music.src = data.music;
-        }else{
-            document.getElementById("musicBtn").style.display = "none";
-        }
-        
-        var openBtn = document.getElementById("openBtn");
-        if(openBtn){
-            openBtn.addEventListener('click', function(){
-                var openBox = document.querySelector(".open-box");
-                openBox.style.display = "none";
-                iframe.contentWindow.open();
-                playMusic();
-                autoWord();
-                if (typeof ntzgo === 'function') {ntzgo();}
-            });
-        }
-    }
-
-    var musicPlay = true;
-    
-    play = function () {
-        music.play();
-        document.removeEventListener("touchstart", play, false);
-    }
-
-    function playMusic(){
-        music.play();
-        document.addEventListener("DOMContentLoaded",function () {play();},false,);
-        document.addEventListener("WeixinJSBridgeReady",function () {play();},false,);
-        document.addEventListener("touchstart", play, false);
-    }
-    
-    $("#musicBtn").click(function(){
-        if(musicPlay){
-            $("#musicBtn img").removeClass("roll");
-            musicPlay = false;
-            music.pause();
-        }else{
-            $("#musicBtn img").addClass("roll");
-            musicPlay = true;
-            music.play();
-        }
-    })
+    iframe.src = 'http://m1.360ka.cn/' + nid;
 </script>
-
-
-
 </body>
 </html>
